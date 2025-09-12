@@ -1,0 +1,204 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Definition of the design system. All colors, gradients, fonts, etc should be defined here. 
+All colors MUST be HSL.
+*/
+
+@layer base {
+  :root {
+    /* Base colors */
+    --background: 222 84% 97%;
+    --foreground: 222 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 200 100% 55%;
+    --primary-foreground: 0 0% 100%;
+    --primary-glow: 200 100% 70%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 260 100% 70%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 200 100% 55%;
+
+    --radius: 0.75rem;
+
+    /* Activity category colors */
+    --food: 25 95% 53%;
+    --food-light: 25 95% 85%;
+    --outdoor: 142 71% 45%;
+    --outdoor-light: 142 71% 85%;
+    --entertainment: 271 81% 56%;
+    --entertainment-light: 271 81% 85%;
+    --relax: 217 91% 60%;
+    --relax-light: 217 91% 85%;
+
+    /* Mood colors */
+    --mood-happy: 51 100% 50%;
+    --mood-relaxed: 217 91% 60%;
+    --mood-energetic: 0 84% 60%;
+
+    /* Theme colors */
+    --theme-lazy: 220 13% 69%;
+    --theme-adventurous: 142 71% 45%;
+    --theme-family: 25 95% 53%;
+
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-food: linear-gradient(135deg, hsl(var(--food)), hsl(var(--food-light)));
+    --gradient-outdoor: linear-gradient(135deg, hsl(var(--outdoor)), hsl(var(--outdoor-light)));
+    --gradient-entertainment: linear-gradient(135deg, hsl(var(--entertainment)), hsl(var(--entertainment-light)));
+    --gradient-relax: linear-gradient(135deg, hsl(var(--relax)), hsl(var(--relax-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(200 100% 55%), hsl(260 100% 70%));
+
+    /* Shadows */
+    --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.1);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.2);
+    --shadow-category: 0 8px 25px -5px hsl(var(--primary) / 0.15);
+
+    /* Animations */
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+
+    --sidebar-background: 0 0% 98%;
+    --sidebar-foreground: 240 5.3% 26.1%;
+    --sidebar-primary: 240 5.9% 10%;
+    --sidebar-primary-foreground: 0 0% 98%;
+    --sidebar-accent: 240 4.8% 95.9%;
+    --sidebar-accent-foreground: 240 5.9% 10%;
+    --sidebar-border: 220 13% 91%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+
+  .dark {
+    --background: 222.2 84% 4.9%;
+    --foreground: 210 40% 98%;
+
+    --card: 222.2 84% 4.9%;
+    --card-foreground: 210 40% 98%;
+
+    --popover: 222.2 84% 4.9%;
+    --popover-foreground: 210 40% 98%;
+
+    --primary: 200 100% 65%;
+    --primary-foreground: 222.2 47.4% 11.2%;
+    --primary-glow: 200 100% 80%;
+
+    --secondary: 217.2 32.6% 17.5%;
+    --secondary-foreground: 210 40% 98%;
+
+    --muted: 217.2 32.6% 17.5%;
+    --muted-foreground: 215 20.2% 65.1%;
+
+    --accent: 260 100% 75%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 217.2 32.6% 17.5%;
+    --input: 217.2 32.6% 17.5%;
+    --ring: 200 100% 65%;
+
+    --food: 25 95% 60%;
+    --food-light: 25 95% 30%;
+    --outdoor: 142 71% 55%;
+    --outdoor-light: 142 71% 25%;
+    --entertainment: 271 81% 65%;
+    --entertainment-light: 271 81% 30%;
+    --relax: 217 91% 70%;
+    --relax-light: 217 91% 30%;
+
+    --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
+    --gradient-food: linear-gradient(135deg, hsl(var(--food)), hsl(var(--food-light)));
+    --gradient-outdoor: linear-gradient(135deg, hsl(var(--outdoor)), hsl(var(--outdoor-light)));
+    --gradient-entertainment: linear-gradient(135deg, hsl(var(--entertainment)), hsl(var(--entertainment-light)));
+    --gradient-relax: linear-gradient(135deg, hsl(var(--relax)), hsl(var(--relax-light)));
+    --gradient-hero: linear-gradient(135deg, hsl(200 100% 65%), hsl(260 100% 75%));
+
+    --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.2);
+    --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
+    --shadow-category: 0 8px 25px -5px hsl(var(--primary) / 0.25);
+
+    --sidebar-background: 240 5.9% 10%;
+    --sidebar-foreground: 240 4.8% 95.9%;
+    --sidebar-primary: 224.3 76.3% 48%;
+    --sidebar-primary-foreground: 0 0% 100%;
+    --sidebar-accent: 240 3.7% 15.9%;
+    --sidebar-accent-foreground: 240 4.8% 95.9%;
+    --sidebar-border: 240 3.7% 15.9%;
+    --sidebar-ring: 217.2 91.2% 59.8%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-sans;
+  }
+
+  /* Custom utility classes */
+  .gradient-primary {
+    background: var(--gradient-primary);
+  }
+
+  .gradient-food {
+    background: var(--gradient-food);
+  }
+
+  .gradient-outdoor {
+    background: var(--gradient-outdoor);
+  }
+
+  .gradient-entertainment {
+    background: var(--gradient-entertainment);
+  }
+
+  .gradient-relax {
+    background: var(--gradient-relax);
+  }
+
+  .gradient-hero {
+    background: var(--gradient-hero);
+  }
+
+  .shadow-soft {
+    box-shadow: var(--shadow-soft);
+  }
+
+  .shadow-glow {
+    box-shadow: var(--shadow-glow);
+  }
+
+  .shadow-category {
+    box-shadow: var(--shadow-category);
+  }
+
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .transition-spring {
+    transition: var(--transition-spring);
+  }
+}
