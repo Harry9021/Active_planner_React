@@ -34,7 +34,7 @@ export const ActivityCard = ({
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer rounded-2xl backdrop-blur-sm card-organic texture-overlay",
+        "group relative overflow-hidden border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer rounded-xl md:rounded-2xl backdrop-blur-sm card-organic texture-overlay",
         categoryStyles[activity.category]
       )}
       onClick={onAdd}
@@ -43,31 +43,31 @@ export const ActivityCard = ({
         <Button
           variant="ghost"
           size="icon"
-          className="absolute right-2 top-2 h-8 w-8 text-card-foreground/70 hover:text-destructive hover:bg-destructive/10"
+          className="absolute right-1 top-1 h-6 w-6 md:h-8 md:w-8 text-card-foreground/70 hover:text-destructive hover:bg-destructive/10"
           onClick={(e) => {
             e.stopPropagation();
             onRemove();
           }}
         >
-          <Trash2 className="h-4 w-4" />
+          <Trash2 className="h-3 w-3 md:h-4 md:w-4" />
         </Button>
       )}
-      <div className="p-4 text-center">
-        <div className="text-3xl mb-2">{activity.icon}</div>
-        <h3 className="font-semibold text-card-foreground mb-1">
+      <div className="p-2 md:p-4 text-center">
+        <div className="text-xl md:text-3xl mb-1 md:mb-2">{activity.icon}</div>
+        <h3 className="font-semibold text-card-foreground mb-1 text-xs md:text-sm lg:text-base leading-tight">
           {activity.name}
         </h3>
-        <p className="text-sm text-card-foreground/70 mb-3">
+        <p className="text-xs md:text-sm text-card-foreground/70 mb-2 md:mb-3 hidden sm:block">
           {activity.description}
         </p>
 
         <Button
           size="sm"
           variant="secondary"
-          className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/20 hover:bg-white/30 border-white/30 rounded-lg hover:shadow-md hover:-translate-y-0.5 btn-organic"
+          className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/20 hover:bg-white/30 border-white/30 rounded-md md:rounded-lg hover:shadow-md hover:-translate-y-0.5 btn-organic text-xs md:text-sm px-2 md:px-3 py-1 md:py-2"
         >
-          <Plus className="h-4 w-4 mr-1" />
-          Add
+          <Plus className="h-3 w-3 md:h-4 md:w-4 mr-1" />
+          <span className="hidden sm:inline">Add</span>
         </Button>
       </div>
 
