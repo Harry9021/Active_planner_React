@@ -11,15 +11,19 @@ interface ActivityCardProps {
 }
 
 const categoryStyles: Record<ActivityCategory, string> = {
-  food: "gradient-food border-food/20 hover:shadow-food/20",
-  outdoor: "gradient-outdoor border-outdoor/20 hover:shadow-outdoor/20",
+  food: "gradient-food border-food/30 hover:shadow-food/30 hover:border-food/50",
+  outdoor:
+    "gradient-outdoor border-outdoor/30 hover:shadow-outdoor/30 hover:border-outdoor/50",
   entertainment:
-    "gradient-entertainment border-entertainment/20 hover:shadow-entertainment/20",
-  relax: "gradient-relax border-relax/20 hover:shadow-relax/20",
+    "gradient-entertainment border-entertainment/30 hover:shadow-entertainment/30 hover:border-entertainment/50",
+  relax:
+    "gradient-relax border-relax/30 hover:shadow-relax/30 hover:border-relax/50",
   learning:
-    "gradient-entertainment border-entertainment/20 hover:shadow-entertainment/20",
-  social: "gradient-outdoor border-outdoor/20 hover:shadow-outdoor/20",
-  adventure: "gradient-outdoor border-outdoor/20 hover:shadow-outdoor/20",
+    "gradient-entertainment border-entertainment/30 hover:shadow-entertainment/30 hover:border-entertainment/50",
+  social:
+    "gradient-outdoor border-outdoor/30 hover:shadow-outdoor/30 hover:border-outdoor/50",
+  adventure:
+    "gradient-outdoor border-outdoor/30 hover:shadow-outdoor/30 hover:border-outdoor/50",
 };
 
 export const ActivityCard = ({
@@ -30,7 +34,7 @@ export const ActivityCard = ({
   return (
     <Card
       className={cn(
-        "group relative overflow-hidden border-2 transition-all duration-300 hover:scale-105 hover:shadow-lg cursor-pointer",
+        "group relative overflow-hidden border-2 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl cursor-pointer rounded-2xl backdrop-blur-sm card-organic texture-overlay",
         categoryStyles[activity.category]
       )}
       onClick={onAdd}
@@ -60,7 +64,7 @@ export const ActivityCard = ({
         <Button
           size="sm"
           variant="secondary"
-          className="opacity-0 group-hover:opacity-100 transition-opacity bg-white/20 hover:bg-white/30 border-white/30"
+          className="opacity-0 group-hover:opacity-100 transition-all duration-300 bg-white/20 hover:bg-white/30 border-white/30 rounded-lg hover:shadow-md hover:-translate-y-0.5 btn-organic"
         >
           <Plus className="h-4 w-4 mr-1" />
           Add

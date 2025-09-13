@@ -8,10 +8,11 @@ import { useWeekendStore } from "@/store/weekendStore";
 import { useState } from "react";
 import { cn } from "@/lib/utils";
 import { useNavigate } from "react-router-dom";
-import { toast } from '@/components/ui/use-toast';
+import { toast } from "@/components/ui/use-toast";
 
 export const Header = () => {
-  const { schedule, availableDays, logout, createShareableLink } = useWeekendStore();
+  const { schedule, availableDays, logout, createShareableLink } =
+    useWeekendStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
   const navigate = useNavigate();
@@ -83,7 +84,7 @@ export const Header = () => {
                 size="sm"
                 variant="outline"
                 onClick={handleShare}
-                className="hover-scale"
+                className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <Share className="h-4 w-4" />
               </Button>
@@ -91,7 +92,7 @@ export const Header = () => {
                 size="sm"
                 variant="outline"
                 onClick={handleExport}
-                className="hover-scale"
+                className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <Download className="h-4 w-4" />
               </Button>
@@ -102,7 +103,7 @@ export const Header = () => {
                   logout();
                   navigate("/start");
                 }}
-                className="hover-scale"
+                className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <LogOut className="h-4 w-4" />
               </Button>
@@ -115,7 +116,7 @@ export const Header = () => {
               variant="outline"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="hover-scale"
+              className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
             >
               {isMobileMenuOpen ? (
                 <X className="h-4 w-4" />
@@ -144,7 +145,7 @@ export const Header = () => {
                 size="sm"
                 variant="outline"
                 onClick={handleShare}
-                className="flex-1 hover-scale"
+                className="flex-1 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <Share className="h-4 w-4 mr-2" />
                 Share Plan
@@ -153,7 +154,7 @@ export const Header = () => {
                 size="sm"
                 variant="outline"
                 onClick={handleExport}
-                className="flex-1 hover-scale"
+                className="flex-1 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <Download className="h-4 w-4 mr-2" />
                 Export
@@ -166,7 +167,7 @@ export const Header = () => {
                   navigate("/start");
                   setIsMobileMenuOpen(false);
                 }}
-                className="flex-1 hover-scale"
+                className="flex-1 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
                 <LogOut className="h-4 w-4 mr-2" />
                 Logout
@@ -178,7 +179,7 @@ export const Header = () => {
         {/* Activity Summary */}
         {totalActivities > 0 && (
           <div className="py-3 animate-fade-in">
-            <div className="flex items-center justify-between p-3 rounded-lg bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20">
+            <div className="flex items-center justify-between p-4 rounded-xl bg-gradient-to-r from-primary/10 to-accent/10 border border-primary/20 shadow-sm">
               <div className="flex items-center gap-2 text-sm">
                 <Calendar className="h-4 w-4 text-primary animate-pulse" />
                 <span>
@@ -197,7 +198,7 @@ export const Header = () => {
                   .map(({ day, count }) => (
                     <span
                       key={day}
-                      className="text-xs px-2 py-1 bg-primary/20 text-primary rounded-full backdrop-blur-sm font-medium"
+                      className="text-xs px-3 py-1.5 bg-primary/20 text-primary rounded-full backdrop-blur-sm font-medium shadow-sm"
                     >
                       {count}
                       <span className="hidden sm:inline"> {day}</span>
@@ -213,10 +214,10 @@ export const Header = () => {
           </div>
         )}
       </div>
-      
-      <ExportDialog 
-        open={exportDialogOpen} 
-        onOpenChange={setExportDialogOpen} 
+
+      <ExportDialog
+        open={exportDialogOpen}
+        onOpenChange={setExportDialogOpen}
       />
     </header>
   );

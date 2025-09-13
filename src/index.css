@@ -8,65 +8,65 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    /* Base colors */
-    --background: 222 84% 97%;
-    --foreground: 222 84% 4.9%;
+    /* Base colors - Warmer, more natural tones */
+    --background: 35 25% 96%;
+    --foreground: 25 15% 15%;
 
     --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card-foreground: 25 15% 15%;
 
     --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover-foreground: 25 15% 15%;
 
-    --primary: 200 100% 55%;
+    --primary: 25 85% 58%;
     --primary-foreground: 0 0% 100%;
-    --primary-glow: 200 100% 70%;
+    --primary-glow: 25 85% 70%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --secondary: 35 30% 92%;
+    --secondary-foreground: 25 15% 20%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --muted: 35 30% 92%;
+    --muted-foreground: 25 10% 45%;
 
-    --accent: 260 100% 70%;
-    --accent-foreground: 0 0% 100%;
+    --accent: 45 85% 65%;
+    --accent-foreground: 25 15% 15%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 55%;
+    --destructive-foreground: 0 0% 100%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 200 100% 55%;
+    --border: 35 20% 88%;
+    --input: 35 20% 88%;
+    --ring: 25 85% 58%;
 
     --radius: 0.75rem;
 
-    /* Activity category colors */
-    --food: 25 95% 53%;
-    --food-light: 25 95% 85%;
-    --outdoor: 142 71% 45%;
-    --outdoor-light: 142 71% 85%;
-    --entertainment: 271 81% 56%;
-    --entertainment-light: 271 81% 85%;
-    --relax: 217 91% 60%;
-    --relax-light: 217 91% 85%;
+    /* Activity category colors - Natural, earthy tones */
+    --food: 30 75% 55%;
+    --food-light: 30 75% 88%;
+    --outdoor: 120 45% 50%;
+    --outdoor-light: 120 45% 88%;
+    --entertainment: 280 60% 60%;
+    --entertainment-light: 280 60% 88%;
+    --relax: 200 50% 55%;
+    --relax-light: 200 50% 88%;
 
-    /* Mood colors */
-    --mood-happy: 51 100% 50%;
-    --mood-relaxed: 217 91% 60%;
-    --mood-energetic: 0 84% 60%;
+    /* Mood colors - Warmer, more natural */
+    --mood-happy: 45 85% 60%;
+    --mood-relaxed: 200 50% 55%;
+    --mood-energetic: 15 75% 55%;
 
-    /* Theme colors */
-    --theme-lazy: 220 13% 69%;
-    --theme-adventurous: 142 71% 45%;
-    --theme-family: 25 95% 53%;
+    /* Theme colors - Earthy, natural tones */
+    --theme-lazy: 35 30% 65%;
+    --theme-adventurous: 120 45% 50%;
+    --theme-family: 30 75% 55%;
 
-    /* Gradients */
+    /* Gradients - Softer, more natural */
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-food: linear-gradient(135deg, hsl(var(--food)), hsl(var(--food-light)));
     --gradient-outdoor: linear-gradient(135deg, hsl(var(--outdoor)), hsl(var(--outdoor-light)));
     --gradient-entertainment: linear-gradient(135deg, hsl(var(--entertainment)), hsl(var(--entertainment-light)));
     --gradient-relax: linear-gradient(135deg, hsl(var(--relax)), hsl(var(--relax-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(200 100% 55%), hsl(260 100% 70%));
+    --gradient-hero: linear-gradient(135deg, hsl(25 85% 58%), hsl(45 85% 65%));
 
     /* Shadows */
     --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.1);
@@ -88,50 +88,50 @@ All colors MUST be HSL.
   }
 
   .dark {
-    --background: 222.2 84% 4.9%;
-    --foreground: 210 40% 98%;
+    --background: 25 15% 8%;
+    --foreground: 35 25% 90%;
 
-    --card: 222.2 84% 4.9%;
-    --card-foreground: 210 40% 98%;
+    --card: 25 15% 10%;
+    --card-foreground: 35 25% 90%;
 
-    --popover: 222.2 84% 4.9%;
-    --popover-foreground: 210 40% 98%;
+    --popover: 25 15% 10%;
+    --popover-foreground: 35 25% 90%;
 
-    --primary: 200 100% 65%;
-    --primary-foreground: 222.2 47.4% 11.2%;
-    --primary-glow: 200 100% 80%;
+    --primary: 25 85% 65%;
+    --primary-foreground: 25 15% 8%;
+    --primary-glow: 25 85% 75%;
 
-    --secondary: 217.2 32.6% 17.5%;
-    --secondary-foreground: 210 40% 98%;
+    --secondary: 25 20% 15%;
+    --secondary-foreground: 35 25% 90%;
 
-    --muted: 217.2 32.6% 17.5%;
-    --muted-foreground: 215 20.2% 65.1%;
+    --muted: 25 20% 15%;
+    --muted-foreground: 35 15% 60%;
 
-    --accent: 260 100% 75%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --accent: 45 85% 70%;
+    --accent-foreground: 25 15% 8%;
 
-    --destructive: 0 62.8% 30.6%;
-    --destructive-foreground: 210 40% 98%;
+    --destructive: 0 70% 60%;
+    --destructive-foreground: 35 25% 90%;
 
-    --border: 217.2 32.6% 17.5%;
-    --input: 217.2 32.6% 17.5%;
-    --ring: 200 100% 65%;
+    --border: 25 20% 20%;
+    --input: 25 20% 20%;
+    --ring: 25 85% 65%;
 
-    --food: 25 95% 60%;
-    --food-light: 25 95% 30%;
-    --outdoor: 142 71% 55%;
-    --outdoor-light: 142 71% 25%;
-    --entertainment: 271 81% 65%;
-    --entertainment-light: 271 81% 30%;
-    --relax: 217 91% 70%;
-    --relax-light: 217 91% 30%;
+    --food: 30 75% 60%;
+    --food-light: 30 75% 25%;
+    --outdoor: 120 45% 55%;
+    --outdoor-light: 120 45% 25%;
+    --entertainment: 280 60% 65%;
+    --entertainment-light: 280 60% 25%;
+    --relax: 200 50% 60%;
+    --relax-light: 200 50% 25%;
 
     --gradient-primary: linear-gradient(135deg, hsl(var(--primary)), hsl(var(--primary-glow)));
     --gradient-food: linear-gradient(135deg, hsl(var(--food)), hsl(var(--food-light)));
     --gradient-outdoor: linear-gradient(135deg, hsl(var(--outdoor)), hsl(var(--outdoor-light)));
     --gradient-entertainment: linear-gradient(135deg, hsl(var(--entertainment)), hsl(var(--entertainment-light)));
     --gradient-relax: linear-gradient(135deg, hsl(var(--relax)), hsl(var(--relax-light)));
-    --gradient-hero: linear-gradient(135deg, hsl(200 100% 65%), hsl(260 100% 75%));
+    --gradient-hero: linear-gradient(135deg, hsl(25 85% 65%), hsl(45 85% 70%));
 
     --shadow-soft: 0 4px 20px -4px hsl(var(--primary) / 0.2);
     --shadow-glow: 0 0 30px hsl(var(--primary) / 0.3);
@@ -200,5 +200,76 @@ All colors MUST be HSL.
 
   .transition-spring {
     transition: var(--transition-spring);
+  }
+
+  /* Organic, humanized styling */
+  .hover-scale {
+    transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .hover-scale:hover {
+    transform: translateY(-2px) scale(1.02);
+    box-shadow: 0 8px 25px -5px hsl(var(--primary) / 0.15);
+  }
+
+  /* Subtle texture overlay */
+  .texture-overlay {
+    position: relative;
+  }
+
+  .texture-overlay::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: radial-gradient(circle at 20% 80%, hsl(var(--primary) / 0.03) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, hsl(var(--accent) / 0.03) 0%, transparent 50%);
+    pointer-events: none;
+    border-radius: inherit;
+  }
+
+  /* Organic button animations */
+  .btn-organic {
+    position: relative;
+    overflow: hidden;
+  }
+
+  .btn-organic::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, hsl(var(--primary-foreground) / 0.1), transparent);
+    transition: left 0.5s;
+  }
+
+  .btn-organic:hover::before {
+    left: 100%;
+  }
+
+  /* Card organic styling */
+  .card-organic {
+    background: linear-gradient(135deg,
+        hsl(var(--card)) 0%,
+        hsl(var(--card) / 0.95) 100%);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.5);
+  }
+
+  /* Input organic styling */
+  .input-organic {
+    background: hsl(var(--background) / 0.8);
+    backdrop-filter: blur(10px);
+    border: 1px solid hsl(var(--border) / 0.6);
+    transition: all 0.2s ease;
+  }
+
+  .input-organic:focus {
+    border-color: hsl(var(--primary) / 0.6);
+    box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
   }
 }

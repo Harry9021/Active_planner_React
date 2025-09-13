@@ -77,35 +77,43 @@ const Start = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center p-4">
-      <Card className="w-full max-w-sm p-6 space-y-4">
-        <div>
-          <h1 className="text-xl font-semibold">Your Weekend Planner</h1>
-          <p className="text-sm text-muted-foreground">
+    <div className="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-background via-primary/5 to-accent/5">
+      <Card className="w-full max-w-sm p-8 space-y-6 rounded-2xl shadow-xl border-primary/20 backdrop-blur-sm card-organic texture-overlay">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-primary mb-2">
+            Your Weekend Planner
+          </h1>
+          <p className="text-muted-foreground">
             Create your private planning space
           </p>
         </div>
-        <form onSubmit={handleSubmit} className="space-y-3">
-          <div className="space-y-1">
-            <label className="text-sm font-medium">Username</label>
+        <form onSubmit={handleSubmit} className="space-y-4">
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">
+              Username
+            </label>
             <Input
               value={username}
               onChange={(e) => setUsername(e.target.value)}
               placeholder="e.g. alex"
+              className="rounded-lg border-primary/20 focus:border-primary/40 input-organic"
             />
           </div>
-          <div className="space-y-1">
-            <label className="text-sm font-medium">Password</label>
+          <div className="space-y-2">
+            <label className="text-sm font-medium text-foreground">
+              Password
+            </label>
             <Input
               type="password"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="••••••••"
+              className="rounded-lg border-primary/20 focus:border-primary/40 input-organic"
             />
           </div>
           <Button
             type="submit"
-            className="w-full"
+            className="w-full rounded-lg btn-organic"
             disabled={isLoading || !username || !password}
           >
             {isLoading ? "Creating..." : "Enter my planner"}

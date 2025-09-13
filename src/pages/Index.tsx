@@ -70,13 +70,13 @@ const Index = () => {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-gradient-to-br from-background via-primary/3 to-accent/3">
       <Header />
 
       <main className="container mx-auto px-4 py-8">
         <div className="max-w-7xl mx-auto">
           <Tabs defaultValue="activities" className="space-y-6">
-            <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto">
+            <TabsList className="grid w-full grid-cols-2 max-w-md mx-auto rounded-xl shadow-sm">
               <TabsTrigger
                 value="activities"
                 className="flex items-center gap-2"
@@ -99,7 +99,7 @@ const Index = () => {
               <div className="grid lg:grid-cols-4 gap-6">
                 <div className="lg:col-span-3">
                   <div className="mb-6">
-                    <h2 className="text-xl font-semibold mb-2">
+                    <h2 className="text-2xl font-bold text-primary mb-2">
                       Choose Your Activities
                     </h2>
                     <p className="text-muted-foreground">
