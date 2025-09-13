@@ -32,6 +32,7 @@ export interface Holiday {
 export interface SharedPlan {
   id: string;
   title: string;
+  userName: string;
   createdAt: Date;
   activities: Activity[];
   schedule: {
@@ -645,9 +646,14 @@ export const useWeekendStore = create<WeekendState>()(
           0
         );
 
+        // Get user name from current thread
+        const currentThread = state.threads[state.currentThreadId];
+        const userName = currentThread?.ownerUsername || 'Weekend Planner User';
+
         const sharedPlan: SharedPlan = {
           id: shareId,
-          title: `Weekend Plan - ${totalActivities} Activities`,
+          title: `${userName}'s Weekend Plan - ${totalActivities} Activities`,
+          userName: userName,
           createdAt: new Date(),
           activities: state.activities,
           schedule: { ...state.schedule },

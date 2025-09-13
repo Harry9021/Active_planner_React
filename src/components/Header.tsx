@@ -11,8 +11,15 @@ import { useNavigate } from "react-router-dom";
 import { toast } from "@/components/ui/use-toast";
 
 export const Header = () => {
-  const { schedule, availableDays, logout, createShareableLink } =
-    useWeekendStore();
+  const {
+    schedule,
+    availableDays,
+    logout,
+    createShareableLink,
+    currentThreadId,
+    threads,
+    selectedWeekendDates,
+  } = useWeekendStore();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [exportDialogOpen, setExportDialogOpen] = useState(false);
   const navigate = useNavigate();
@@ -32,9 +39,29 @@ export const Header = () => {
 
   const handleShare = () => {
     const shareLink = createShareableLink();
+
+    // Get user name from current thread
+    const currentThread = threads[currentThreadId];
+    const userName = currentThread?.ownerUsername || "Weekend Planner User";
+
+    // Format weekend dates
+    const formatDate = (date: Date) => {
+      return date.toLocaleDateString("en-US", {
+        weekday: "long",
+        year: "numeric",
+        month: "long",
+        day: "numeric",
+      });
+    };
+
+    const datesText =
+      selectedWeekendDates.length > 0
+        ? ` for ${selectedWeekendDates.map(formatDate).join(" - ")}`
+        : "";
+
     const shareData = {
-      title: "My Weekend Plan",
-      text: `Check out my weekend plan with ${totalActivities} activities!`,
+      title: `${userName}'s Weekend Plan`,
+      text: `Check out ${userName}'s weekend plan with ${totalActivities} activities${datesText}!`,
       url: shareLink,
     };
 
@@ -44,7 +71,7 @@ export const Header = () => {
       navigator.clipboard.writeText(shareLink).then(() => {
         toast({
           title: "Share link copied!",
-          description: "Your weekend plan link has been copied to clipboard.",
+          description: `Your weekend plan link has been copied to clipboard.`,
         });
       });
     }

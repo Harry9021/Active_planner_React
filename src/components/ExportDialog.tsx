@@ -1,6 +1,11 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+} from "@/components/ui/dialog";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
@@ -16,19 +21,34 @@ interface ExportDialogProps {
 }
 
 export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
-  const { schedule, availableDays, currentTheme, weekendLength, selectedWeekendDates } = useWeekendStore();
+  const {
+    schedule,
+    availableDays,
+    currentTheme,
+    weekendLength,
+    selectedWeekendDates,
+    currentThreadId,
+    threads,
+  } = useWeekendStore();
   const [isExporting, setIsExporting] = useState<string | null>(null);
 
-  const totalActivities = availableDays.reduce((sum, day) => sum + schedule[day].length, 0);
+  const totalActivities = availableDays.reduce(
+    (sum, day) => sum + schedule[day].length,
+    0
+  );
 
   const formatDate = (date: Date) => {
-    return date.toLocaleDateString('en-US', { 
-      weekday: 'long', 
-      year: 'numeric', 
-      month: 'long', 
-      day: 'numeric' 
+    return date.toLocaleDateString("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
     });
   };
+
+  // Get user name from current thread
+  const currentThread = threads[currentThreadId];
+  const userName = currentThread?.ownerUsername || "Weekend Planner User";
 
   const exportToPDF = async () => {
     setIsExporting("pdf");
@@ -41,18 +61,26 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
 
       // Title
       pdf.setFontSize(24);
-      pdf.setFont(undefined, 'bold');
-      pdf.text("Weekend Schedule", margin, yPosition);
+      pdf.setFont(undefined, "bold");
+      pdf.text(`${userName}'s Weekend Schedule`, margin, yPosition);
       yPosition += 15;
 
       // Subtitle
       pdf.setFontSize(12);
-      pdf.setFont(undefined, 'normal');
-      pdf.text(`${totalActivities} activities planned for ${weekendLength} weekend`, margin, yPosition);
+      pdf.setFont(undefined, "normal");
+      pdf.text(
+        `${totalActivities} activities planned for ${weekendLength} weekend`,
+        margin,
+        yPosition
+      );
       yPosition += 10;
 
       if (selectedWeekendDates.length > 0) {
-        pdf.text(`Dates: ${selectedWeekendDates.map(formatDate).join(" - ")}`, margin, yPosition);
+        pdf.text(
+          `Dates: ${selectedWeekendDates.map(formatDate).join(" - ")}`,
+          margin,
+          yPosition
+        );
         yPosition += 15;
       } else {
         yPosition += 10;
@@ -73,13 +101,13 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
 
           // Day header
           pdf.setFontSize(16);
-          pdf.setFont(undefined, 'bold');
+          pdf.setFont(undefined, "bold");
           const dayTitle = day.charAt(0).toUpperCase() + day.slice(1);
           pdf.text(dayTitle, margin, yPosition);
           yPosition += 8;
 
           pdf.setFontSize(10);
-          pdf.setFont(undefined, 'normal');
+          pdf.setFont(undefined, "normal");
           pdf.text(`${schedule[day].length} activities`, margin, yPosition);
           yPosition += 12;
 
@@ -91,23 +119,27 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
             }
 
             pdf.setFontSize(11);
-            pdf.setFont(undefined, 'normal');
-            
+            pdf.setFont(undefined, "normal");
+
             // Activity number and emoji
             pdf.text(`${index + 1}. ${activity.icon}`, margin + 5, yPosition);
-            
+
             // Activity name
-            pdf.setFont(undefined, 'bold');
+            pdf.setFont(undefined, "bold");
             pdf.text(activity.name, margin + 20, yPosition);
-            
+
             // Activity description
-            pdf.setFont(undefined, 'normal');
+            pdf.setFont(undefined, "normal");
             pdf.text(`- ${activity.description}`, margin + 20, yPosition + 5);
-            
+
             // Category badge
             pdf.setFontSize(9);
-            pdf.text(`[${activity.category.toUpperCase()}]`, margin + 20, yPosition + 10);
-            
+            pdf.text(
+              `[${activity.category.toUpperCase()}]`,
+              margin + 20,
+              yPosition + 10
+            );
+
             // Mood if present
             if (activity.mood) {
               pdf.text(`Mood: ${activity.mood}`, margin + 80, yPosition + 10);
@@ -115,7 +147,7 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
 
             yPosition += 18;
           });
-          
+
           yPosition += 8;
         }
       });
@@ -123,10 +155,18 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
       // Footer
       pdf.setFontSize(8);
       pdf.text("Generated by Weekend Planner", margin, pageHeight - 15);
-      pdf.text(new Date().toLocaleDateString(), pageWidth - 60, pageHeight - 15);
+      pdf.text(
+        new Date().toLocaleDateString(),
+        pageWidth - 60,
+        pageHeight - 15
+      );
 
-      pdf.save(`weekend-schedule-${weekendLength}.pdf`);
-      
+      pdf.save(
+        `${userName
+          .toLowerCase()
+          .replace(/\s+/g, "-")}-weekend-schedule-${weekendLength}.pdf`
+      );
+
       toast({
         title: "PDF exported successfully!",
         description: "Your weekend schedule has been downloaded.",
@@ -146,34 +186,38 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
     setIsExporting("json");
     try {
       const exportData = {
-        title: "My Weekend Schedule",
+        title: `${userName}'s Weekend Schedule`,
+        userName: userName,
         createdAt: new Date().toISOString(),
         theme: currentTheme,
         weekendLength,
         dates: selectedWeekendDates,
         totalActivities,
         schedule: Object.fromEntries(
-          availableDays.map(day => [
+          availableDays.map((day) => [
             day,
-            schedule[day].map(activity => ({
+            schedule[day].map((activity) => ({
               name: activity.name,
               description: activity.description,
               category: activity.category,
               icon: activity.icon,
               mood: activity.mood,
-            }))
+            })),
           ])
         ),
       };
 
       const dataStr = JSON.stringify(exportData, null, 2);
-      const dataUri = 'data:application/json;charset=utf-8,'+ encodeURIComponent(dataStr);
-      
-      const exportFileDefaultName = `weekend-schedule-${weekendLength}.json`;
-      
-      const linkElement = document.createElement('a');
-      linkElement.setAttribute('href', dataUri);
-      linkElement.setAttribute('download', exportFileDefaultName);
+      const dataUri =
+        "data:application/json;charset=utf-8," + encodeURIComponent(dataStr);
+
+      const exportFileDefaultName = `${userName
+        .toLowerCase()
+        .replace(/\s+/g, "-")}-weekend-schedule-${weekendLength}.json`;
+
+      const linkElement = document.createElement("a");
+      linkElement.setAttribute("href", dataUri);
+      linkElement.setAttribute("download", exportFileDefaultName);
       linkElement.click();
 
       toast({
@@ -195,46 +239,72 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
     setIsExporting("image");
     try {
       // Create a temporary element to render the schedule
-      const tempDiv = document.createElement('div');
-      tempDiv.style.position = 'absolute';
-      tempDiv.style.top = '-9999px';
-      tempDiv.style.left = '-9999px';
-      tempDiv.style.width = '800px';
-      tempDiv.style.padding = '40px';
-      tempDiv.style.backgroundColor = '#ffffff';
-      tempDiv.style.fontFamily = 'Arial, sans-serif';
+      const tempDiv = document.createElement("div");
+      tempDiv.style.position = "absolute";
+      tempDiv.style.top = "-9999px";
+      tempDiv.style.left = "-9999px";
+      tempDiv.style.width = "800px";
+      tempDiv.style.padding = "40px";
+      tempDiv.style.backgroundColor = "#ffffff";
+      tempDiv.style.fontFamily = "Arial, sans-serif";
 
       const scheduleHTML = `
         <div style="text-align: center; margin-bottom: 30px;">
-          <h1 style="font-size: 32px; margin-bottom: 10px; color: #333;">Weekend Schedule</h1>
+          <h1 style="font-size: 32px; margin-bottom: 10px; color: #333;">${userName}'s Weekend Schedule</h1>
           <p style="font-size: 16px; color: #666; margin-bottom: 5px;">${totalActivities} activities planned for ${weekendLength} weekend</p>
-          ${selectedWeekendDates.length > 0 ? `<p style="font-size: 14px; color: #888;">${selectedWeekendDates.map(formatDate).join(" - ")}</p>` : ''}
+          ${
+            selectedWeekendDates.length > 0
+              ? `<p style="font-size: 14px; color: #888;">${selectedWeekendDates
+                  .map(formatDate)
+                  .join(" - ")}</p>`
+              : ""
+          }
         </div>
         
-        ${availableDays.map(day => 
-          schedule[day].length > 0 ? `
+        ${availableDays
+          .map((day) =>
+            schedule[day].length > 0
+              ? `
             <div style="margin-bottom: 25px;">
               <h2 style="font-size: 24px; margin-bottom: 15px; color: #333; border-bottom: 2px solid #eee; padding-bottom: 5px;">
-                ${day.charAt(0).toUpperCase() + day.slice(1)} (${schedule[day].length} activities)
+                ${day.charAt(0).toUpperCase() + day.slice(1)} (${
+                  schedule[day].length
+                } activities)
               </h2>
               <div style="display: grid; gap: 10px;">
-                ${schedule[day].map((activity, index) => `
+                ${schedule[day]
+                  .map(
+                    (activity, index) => `
                   <div style="display: flex; align-items: center; padding: 12px; background-color: #f8f9fa; border-radius: 8px; border-left: 4px solid #4f46e5;">
-                    <span style="font-size: 20px; margin-right: 12px;">${activity.icon}</span>
+                    <span style="font-size: 20px; margin-right: 12px;">${
+                      activity.icon
+                    }</span>
                     <div style="flex: 1;">
-                      <div style="font-weight: bold; font-size: 16px; color: #333;">${activity.name}</div>
-                      <div style="font-size: 14px; color: #666; margin-top: 2px;">${activity.description}</div>
+                      <div style="font-weight: bold; font-size: 16px; color: #333;">${
+                        activity.name
+                      }</div>
+                      <div style="font-size: 14px; color: #666; margin-top: 2px;">${
+                        activity.description
+                      }</div>
                       <div style="font-size: 12px; color: #888; margin-top: 4px;">
                         <span style="background-color: #e5e7eb; padding: 2px 8px; border-radius: 12px; margin-right: 8px;">${activity.category.toUpperCase()}</span>
-                        ${activity.mood ? `<span>Mood: ${activity.mood}</span>` : ''}
+                        ${
+                          activity.mood
+                            ? `<span>Mood: ${activity.mood}</span>`
+                            : ""
+                        }
                       </div>
                     </div>
                   </div>
-                `).join('')}
+                `
+                  )
+                  .join("")}
               </div>
             </div>
-          ` : ''
-        ).join('')}
+          `
+              : ""
+          )
+          .join("")}
         
         <div style="text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; font-size: 12px; color: #888;">
           Generated by Weekend Planner • ${new Date().toLocaleDateString()}
@@ -245,7 +315,7 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
       document.body.appendChild(tempDiv);
 
       const canvas = await html2canvas(tempDiv, {
-        backgroundColor: '#ffffff',
+        backgroundColor: "#ffffff",
         scale: 2,
         useCORS: true,
       });
@@ -256,9 +326,11 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
       canvas.toBlob((blob) => {
         if (blob) {
           const url = URL.createObjectURL(blob);
-          const link = document.createElement('a');
+          const link = document.createElement("a");
           link.href = url;
-          link.download = `weekend-schedule-${weekendLength}.png`;
+          link.download = `${userName
+            .toLowerCase()
+            .replace(/\s+/g, "-")}-weekend-schedule-${weekendLength}.png`;
           link.click();
           URL.revokeObjectURL(url);
 
@@ -267,7 +339,7 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
             description: "Your schedule image has been downloaded.",
           });
         }
-      }, 'image/png');
+      }, "image/png");
     } catch (error) {
       toast({
         title: "Export failed",
@@ -282,19 +354,33 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
   const copyToClipboard = () => {
     setIsExporting("clipboard");
     try {
-      const scheduleText = `🗓️ WEEKEND SCHEDULE\n\n` +
+      const scheduleText =
+        `🗓️ ${userName.toUpperCase()}'S WEEKEND SCHEDULE\n\n` +
         `📅 ${totalActivities} activities planned for ${weekendLength} weekend\n` +
-        (selectedWeekendDates.length > 0 ? `📍 ${selectedWeekendDates.map(formatDate).join(" - ")}\n` : '') +
+        (selectedWeekendDates.length > 0
+          ? `📍 ${selectedWeekendDates.map(formatDate).join(" - ")}\n`
+          : "") +
         `\n` +
-        availableDays.map(day => 
-          schedule[day].length > 0 ? 
-            `📋 ${day.toUpperCase()} (${schedule[day].length} activities)\n` +
-            schedule[day].map((activity, index) => 
-              `${index + 1}. ${activity.icon} ${activity.name}\n   ${activity.description}` +
-              (activity.mood ? ` | Mood: ${activity.mood}` : '') + `\n`
-            ).join('') + `\n`
-          : ''
-        ).join('') +
+        availableDays
+          .map((day) =>
+            schedule[day].length > 0
+              ? `📋 ${day.toUpperCase()} (${
+                  schedule[day].length
+                } activities)\n` +
+                schedule[day]
+                  .map(
+                    (activity, index) =>
+                      `${index + 1}. ${activity.icon} ${activity.name}\n   ${
+                        activity.description
+                      }` +
+                      (activity.mood ? ` | Mood: ${activity.mood}` : "") +
+                      `\n`
+                  )
+                  .join("") +
+                `\n`
+              : ""
+          )
+          .join("") +
         `Generated by Weekend Planner 🌟`;
 
       navigator.clipboard.writeText(scheduleText);
@@ -354,11 +440,10 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
           </DialogHeader>
           <div className="text-center py-8">
             <p className="text-muted-foreground mb-4">
-              No activities scheduled yet. Add some activities to your weekend plan to export.
+              No activities scheduled yet. Add some activities to your weekend
+              plan to export.
             </p>
-            <Button onClick={() => onOpenChange(false)}>
-              Got it
-            </Button>
+            <Button onClick={() => onOpenChange(false)}>Got it</Button>
           </div>
         </DialogContent>
       </Dialog>
@@ -426,7 +511,9 @@ export const ExportDialog = ({ open, onOpenChange }: ExportDialogProps) => {
         <Separator />
 
         <div className="text-xs text-muted-foreground text-center">
-          Your schedule includes {availableDays.filter(day => schedule[day].length > 0).length} planned days with detailed activities and descriptions.
+          Your schedule includes{" "}
+          {availableDays.filter((day) => schedule[day].length > 0).length}{" "}
+          planned days with detailed activities and descriptions.
         </div>
       </DialogContent>
     </Dialog>
