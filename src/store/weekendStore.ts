@@ -640,6 +640,17 @@ export const useWeekendStore = create<WeekendState>()(
       // Sharing functionality
       createShareableLink: (): string => {
         const state = get();
+        const isScheduleEmpty = state.availableDays.every(
+          dayKey => state.schedule[dayKey].length === 0
+        );
+
+        if (isScheduleEmpty) {
+          toast({
+            title: 'Your schedule is empty',
+            description: 'No activities are left. Add some to plan your weekend!',
+            variant: 'destructive', // optional: makes it visually distinct
+          });
+        }
         const shareId = generateId() + generateId(); // More unique ID
         const totalActivities = state.availableDays.reduce(
           (sum, day) => sum + state.schedule[day].length,
