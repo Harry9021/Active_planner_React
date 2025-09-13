@@ -153,3 +153,6 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 - Export requires browser permissions for downloads/clipboard; check your browser if blocked.
 
 ---
+
+
+https://docs.google.com/document/d/1oFxEzABMw58F8aneSU10XvOrHmnnejtBzSsKqrW-aj8/edit?usp=sharing

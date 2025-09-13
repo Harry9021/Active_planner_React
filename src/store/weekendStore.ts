@@ -248,17 +248,39 @@ export const useWeekendStore = create<WeekendState>()(
 
       // Actions
       addActivity: (day, activity) => {
-        toast({ title: 'Activity added', description: `${activity.icon} ${activity.name} added to ${capitalize(day)}.` });
         set((state) => {
+          // Check if activity already exists in the selected day
+          const alreadyExists = state.schedule[day].some(
+            (a) => a.id === activity.id
+          );
+
+          if (alreadyExists) {
+            toast({
+              title: 'Already added',
+              description: `${activity.icon} ${activity.name} is already in ${capitalize(day)}.`,
+              variant: 'destructive', // optional: make it visually distinct
+            });
+            return state; // Don't modify state
+          }
+
+          // If not duplicate, proceed with adding
+          toast({
+            title: 'Activity added',
+            description: `${activity.icon} ${activity.name} added to ${capitalize(day)}.`,
+          });
+
           const newScheduledActivity: ScheduledActivity = {
             ...activity,
             scheduledId: generateId(),
           };
+
           const newSchedule = {
             ...state.schedule,
             [day]: [...state.schedule[day], newScheduledActivity],
           };
+
           const threadId = state.currentThreadId;
+
           return {
             schedule: newSchedule,
             threads: threadId
