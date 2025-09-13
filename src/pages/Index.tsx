@@ -5,6 +5,7 @@ import { Header } from "@/components/Header";
 import { ActivityList } from "@/components/ActivityList";
 import { Schedule } from "@/components/Schedule";
 import { HolidayAwareness } from "@/components/HolidayAwareness";
+import { Guide } from "@/components/Guide";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import {
   Card,
@@ -28,13 +29,14 @@ import {
   Users,
   MapPin,
   ChevronRight,
+  BookOpen,
 } from "lucide-react";
 import { useParams, useNavigate } from "react-router-dom";
 import { cn } from "@/lib/utils";
 
 const Index = () => {
   const [selectedDay, setSelectedDay] = useState<DayKey>("saturday");
-  const [activeTab, setActiveTab] = useState("dashboard");
+  const [activeTab, setActiveTab] = useState("dashboard"); // Will be updated based on user status
   const activityListRef = useRef<HTMLDivElement>(null);
   const {
     addActivity,
@@ -87,6 +89,18 @@ const Index = () => {
     (sum, day) => sum + schedule[day].length,
     0
   );
+
+  // Check if user has any activities planned to determine if they're new
+  const isNewUser = activities.length === 0 && totalScheduled === 0;
+
+  // Set initial tab based on user status
+  useEffect(() => {
+    if (isNewUser) {
+      setActiveTab("guide");
+    } else {
+      setActiveTab("dashboard");
+    }
+  }, [isNewUser]);
   const spaceLabel =
     currentThreadId && threads[currentThreadId]?.ownerUsername
       ? threads[currentThreadId]?.ownerUsername
@@ -160,7 +174,11 @@ const Index = () => {
             onValueChange={setActiveTab}
             className="space-y-6"
           >
-            <TabsList className="grid w-full grid-cols-3 max-w-lg mx-auto rounded-xl shadow-sm">
+            <TabsList className="grid w-full grid-cols-4 max-w-2xl mx-auto rounded-xl shadow-sm">
+              <TabsTrigger value="guide" className="flex items-center gap-2">
+                <BookOpen className="h-4 w-4" />
+                <span className="hidden sm:inline">Guide</span>
+              </TabsTrigger>
               <TabsTrigger
                 value="dashboard"
                 className="flex items-center gap-2"
@@ -192,6 +210,11 @@ const Index = () => {
                 Space: {spaceLabel}
               </div>
             )}
+
+            {/* Guide Tab */}
+            <TabsContent value="guide" className="space-y-6">
+              <Guide onStartPlanning={() => setActiveTab("activities")} />
+            </TabsContent>
 
             {/* Dashboard Tab */}
             <TabsContent value="dashboard" className="space-y-6">
@@ -359,7 +382,7 @@ const Index = () => {
               </Card>
 
               {/* Quick Actions */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <Card
                   className="hover:shadow-md transition-shadow cursor-pointer"
                   onClick={() => setActiveTab("activities")}
@@ -390,6 +413,23 @@ const Index = () => {
                         </p>
                       </div>
                       <ChevronRight className="h-5 w-5 text-muted-foreground" />
+                    </div>
+                  </CardContent>
+                </Card>
+
+                <Card
+                  className="hover:shadow-md transition-shadow cursor-pointer"
+                  onClick={() => setActiveTab("guide")}
+                >
+                  <CardContent className="p-6">
+                    <div className="flex items-center justify-between">
+                      <div>
+                        <h3 className="font-semibold mb-1">View Guide</h3>
+                        <p className="text-sm text-muted-foreground">
+                          Learn how to use the app
+                        </p>
+                      </div>
+                      <BookOpen className="h-5 w-5 text-muted-foreground" />
                     </div>
                   </CardContent>
                 </Card>
