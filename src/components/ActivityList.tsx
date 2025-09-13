@@ -8,7 +8,7 @@ import { ActivityCard } from "./ActivityCard";
 import { CreateActivityDialog } from "./CreateActivityDialog";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { Search, Filter, X } from "lucide-react";
+import { Search, Filter, X, ChevronDown } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { type Activity } from "../store/weekendStore";
 
@@ -27,6 +27,7 @@ export const ActivityList = ({
   const [selectedCategory, setSelectedCategory] = useState<
     ActivityCategory | "all"
   >("all");
+  const [visibleCount, setVisibleCount] = useState(6); // Start with 6 cards on mobile
 
   const categories: {
     value: ActivityCategory | "all";
@@ -58,6 +59,19 @@ export const ActivityList = ({
     }
   };
 
+  // Reset visible count when filters change
+  useEffect(() => {
+    setVisibleCount(6);
+  }, [search, selectedCategory]);
+
+  const handleViewMore = () => {
+    setVisibleCount((prev) => prev + 6); // Load 6 more cards
+  };
+
+  const handleViewLess = () => {
+    setVisibleCount(6); // Reset to initial count
+  };
+
   const filteredActivities = activities.filter((activity) => {
     const searchTerms = search
       .toLowerCase()
@@ -77,6 +91,10 @@ export const ActivityList = ({
       selectedCategory === "all" || activity.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
+
+  // Get visible activities based on pagination
+  const visibleActivities = filteredActivities.slice(0, visibleCount);
+  const hasMoreActivities = filteredActivities.length > visibleCount;
 
   console.log("Total activities:", activities.length);
   console.log("Filtered activities:", filteredActivities.length);
@@ -153,7 +171,7 @@ export const ActivityList = ({
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
-        {filteredActivities.map((activity) => (
+        {visibleActivities.map((activity) => (
           <ActivityCard
             key={activity.id}
             activity={activity}
@@ -167,6 +185,31 @@ export const ActivityList = ({
           />
         ))}
       </div>
+
+      {/* View More/Less Buttons */}
+      {filteredActivities.length > 0 && (
+        <div className="flex justify-center pt-4">
+          {hasMoreActivities ? (
+            <Button
+              variant="outline"
+              onClick={handleViewMore}
+              className="flex items-center gap-2 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+            >
+              <ChevronDown className="h-4 w-4" />
+              View More ({filteredActivities.length - visibleCount} remaining)
+            </Button>
+          ) : visibleCount > 6 ? (
+            <Button
+              variant="outline"
+              onClick={handleViewLess}
+              className="flex items-center gap-2 hover:shadow-md transition-all duration-200 hover:-translate-y-0.5"
+            >
+              <ChevronDown className="h-4 w-4 rotate-180" />
+              Show Less
+            </Button>
+          ) : null}
+        </div>
+      )}
 
       {filteredActivities.length === 0 && (
         <div className="text-center py-12">
