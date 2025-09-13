@@ -27,7 +27,16 @@ export const ActivityList = ({
   const [selectedCategory, setSelectedCategory] = useState<
     ActivityCategory | "all"
   >("all");
-  const [visibleCount, setVisibleCount] = useState(6); // Start with 6 cards on mobile
+  const [visibleCount, setVisibleCount] = useState(6);
+  const [isMobile, setIsMobile] = useState(false); // ✅ track screen size
+
+  // Detect screen size
+  useEffect(() => {
+    const checkMobile = () => setIsMobile(window.innerWidth < 768);
+    checkMobile();
+    window.addEventListener("resize", checkMobile);
+    return () => window.removeEventListener("resize", checkMobile);
+  }, []);
 
   const categories: {
     value: ActivityCategory | "all";
@@ -49,35 +58,18 @@ export const ActivityList = ({
     setIsSearchFocused(false);
   };
 
-  const handleSearchFocus = () => {
-    setIsSearchFocused(true);
-  };
+  const handleSearchFocus = () => setIsSearchFocused(true);
+  const handleSearchBlur = () => !search && setIsSearchFocused(false);
 
-  const handleSearchBlur = () => {
-    if (!search) {
-      setIsSearchFocused(false);
-    }
-  };
-
-  // Reset visible count when filters change
   useEffect(() => {
-    setVisibleCount(6);
+    setVisibleCount(6); // Reset count when filters change
   }, [search, selectedCategory]);
 
-  const handleViewMore = () => {
-    setVisibleCount((prev) => prev + 6); // Load 6 more cards
-  };
-
-  const handleViewLess = () => {
-    setVisibleCount(6); // Reset to initial count
-  };
+  const handleViewMore = () => setVisibleCount((prev) => prev + 6);
+  const handleViewLess = () => setVisibleCount(6);
 
   const filteredActivities = activities.filter((activity) => {
-    const searchTerms = search
-      .toLowerCase()
-      .split(" ")
-      .filter((term) => term.length > 0);
-
+    const searchTerms = search.toLowerCase().split(" ").filter(Boolean);
     const matchesSearch =
       searchTerms.length === 0 ||
       searchTerms.every(
@@ -86,21 +78,21 @@ export const ActivityList = ({
           activity.description.toLowerCase().includes(term) ||
           activity.category.toLowerCase().includes(term)
       );
-
     const matchesCategory =
       selectedCategory === "all" || activity.category === selectedCategory;
     return matchesSearch && matchesCategory;
   });
 
-  // Get visible activities based on pagination
-  const visibleActivities = filteredActivities.slice(0, visibleCount);
-  const hasMoreActivities = filteredActivities.length > visibleCount;
+  // ✅ Show all activities on PC, limited on mobile
+  const visibleActivities = isMobile
+    ? filteredActivities.slice(0, visibleCount)
+    : filteredActivities;
 
-  console.log("Total activities:", activities.length);
-  console.log("Filtered activities:", filteredActivities.length);
+  const hasMoreActivities = isMobile && filteredActivities.length > visibleCount;
 
   return (
     <div className="space-y-6">
+      {/* Search + Add Activity */}
       <div className="space-y-4">
         <div className="flex gap-4 items-center">
           <div
@@ -147,6 +139,7 @@ export const ActivityList = ({
           </div>
         </div>
 
+        {/* Category Buttons */}
         <div className="flex flex-wrap gap-2">
           {categories.map((category) => (
             <Button
@@ -170,6 +163,7 @@ export const ActivityList = ({
         </div>
       </div>
 
+      {/* Activity Cards */}
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 gap-2 md:gap-4">
         {visibleActivities.map((activity) => (
           <ActivityCard
@@ -177,17 +171,19 @@ export const ActivityList = ({
             activity={activity}
             onAdd={() => onAddActivity(activity)}
             onRemove={() => {
-              const confirmed = window.confirm(
-                `Delete ${activity.name}? This also removes it from schedule.`
-              );
-              if (confirmed) removeCatalogActivity(activity.id);
+              if (
+                window.confirm(
+                  `Delete ${activity.name}? This also removes it from schedule.`
+                )
+              )
+                removeCatalogActivity(activity.id);
             }}
           />
         ))}
       </div>
 
-      {/* View More/Less Buttons */}
-      {filteredActivities.length > 0 && (
+      {/* View More / Show Less - only on mobile */}
+      {isMobile && filteredActivities.length > 0 && (
         <div className="flex justify-center pt-4">
           {hasMoreActivities ? (
             <Button
@@ -211,6 +207,7 @@ export const ActivityList = ({
         </div>
       )}
 
+      {/* Empty State */}
       {filteredActivities.length === 0 && (
         <div className="text-center py-12">
           <Filter className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
