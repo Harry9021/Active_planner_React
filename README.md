@@ -95,7 +95,7 @@ State is managed with **Zustand** in `src/store/weekendStore.ts` and persisted u
 ### WorkFlow
 
 ```mermaid
-flowchart TD
+flowchart LR
     A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
     B --> C[📅 Select Weekend Dates]
     C --> D[🎨 Curate Activities]
