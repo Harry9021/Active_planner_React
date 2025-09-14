@@ -126,21 +126,6 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
-### WorkFlow
-
-```mermaid
-flowchart TD
-    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
-    B --> C[📅 Select Weekend Dates]
-    C --> D[🎨 Curate Activities]
-    D --> E[🗂️ Organize Schedule]
-    E --> F[😊 Set Moods]
-    F --> G[💾 Persist (Local Storage)]
-    G --> H[📤 Export / 🔗 Share]
-    H -->|Loop| D
-
-```
-
 ### Preview
 
 **Start / Login Page**
@@ -196,5 +181,18 @@ flowchart TD
 - Export requires browser permissions for downloads/clipboard; check your browser if blocked.
 
 ---
+
+### WorkFlow
+
+```mermaid
+flowchart TD
+    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
+    B --> C[📅 Select Weekend Dates]
+    C --> D[🎨 Curate Activities]
+    D --> E[🗂️ Organize Schedule]
+    E --> F[😊 Set Moods]
+    F --> G[💾 Persist (Local Storage)]
+    G --> H[📤 Export / 🔗 Share]
+    H -->|Loop| D
 
 https://docs.google.com/document/d/1oFxEzABMw58F8aneSU10XvOrHmnnejtBzSsKqrW-aj8/edit?usp=sharing
