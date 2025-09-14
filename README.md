@@ -133,7 +133,7 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ![DatePicker](./SS/datepicker.png)
 
-![DashBoard Page Or Landing Page](./SS/dashboard_1.png)(./SS/dashboard_2.png)
+![DashBoard Page Or Landing Page](./SS/dashboard_1.png)![DashBoard Page Or Landing Page](./SS/dashboard_2.png)
 
 ![Activity Page](./SS/activity_tab.png)
 
