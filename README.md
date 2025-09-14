@@ -141,7 +141,7 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ![Schedule Page](./SS/schedule_tab.png)
 
-![Share Pop-up](./SS/share_button.png)
+![Share Pop-up](./SS/share_button.jpg)
 
 ![Export Pop-up](./SS/export_button.png)
 
