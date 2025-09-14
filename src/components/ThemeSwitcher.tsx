@@ -103,13 +103,14 @@ export const ThemeSwitcher = () => {
               variant={currentTheme === theme.value ? "default" : "outline"}
               size="sm"
               onClick={() => setTheme(theme.value)}
+              title={theme.label}
               className={cn(
                 "h-auto flex flex-col items-center gap-1 transition-all hover:scale-105",
                 currentTheme === theme.value && theme.color
               )}
             >
               <span className="text-lg">{theme.icon}</span>
-              <span className="text-xs font-medium">{theme.label}</span>
+              {/* <span className="text-xs font-medium">{theme.label}</span> */}
             </Button>
           ))}
         </div>

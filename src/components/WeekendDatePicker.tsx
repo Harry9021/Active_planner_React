@@ -94,15 +94,15 @@ export function WeekendDatePicker() {
 
   return (
     <div className="flex space-y-2 justify-center items-center gap-2">
-      <label className="text-center text-sm font-medium whitespace-nowrap hidden md:inline-block">
+      {/* <label className="text-center text-sm font-medium whitespace-nowrap hidden md:inline-block">
         Weekend Dates :{" "}
-      </label>
+      </label> */}
       <Popover>
         <PopoverTrigger asChild>
           <Button
             variant="outline"
             className={cn(
-              "justify-start text-left font-normal",
+              "justify-start text-center font-normal",
               "w-10 md:w-full md:min-w-[200px]", 
               "p-2 md:p-3", 
               !selectedWeekendDates?.length && "text-muted-foreground"

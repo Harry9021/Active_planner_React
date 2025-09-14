@@ -78,7 +78,7 @@ export const Header = () => {
   };
 
   return (
-    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b">
+    <header className="sticky top-0 z-50 bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60 border-b flex items-center">
       <div className="container mx-auto px-4">
         {/* Main Header Row */}
         <div className="flex items-center justify-between h-16">
@@ -87,9 +87,6 @@ export const Header = () => {
             <h1 className="text-xl md:text-2xl font-bold gradient-hero bg-clip-text text-transparent truncate">
               Weekend Planner
             </h1>
-            <p className="text-xs md:text-sm text-muted-foreground hidden sm:block">
-              Plan your perfect weekend adventure
-            </p>
           </div>
 
           {/* Desktop Controls - Center aligned */}
@@ -110,6 +107,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Share Weekend Plan"
                 onClick={handleShare}
                 className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
@@ -118,6 +116,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Export Weekend Plan"
                 onClick={handleExport}
                 className="hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
@@ -126,6 +125,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Logout"
                 onClick={() => {
                   logout();
                   navigate("/start");
@@ -171,6 +171,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Share Weekend Plan"
                 onClick={handleShare}
                 className="flex-1 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
@@ -180,6 +181,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Export Weekend Plan"
                 onClick={handleExport}
                 className="flex-1 hover:shadow-md hover:-translate-y-0.5 transition-all duration-200 rounded-lg"
               >
@@ -189,6 +191,7 @@ export const Header = () => {
               <Button
                 size="sm"
                 variant="outline"
+                title="Logout"
                 onClick={() => {
                   logout();
                   navigate("/start");
