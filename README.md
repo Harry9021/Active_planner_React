@@ -194,5 +194,3 @@ flowchart TD
     F --> G[💾 `Persist - Local Storage`]
     G --> H[📤 Export / 🔗 Share]
     H -->|Loop| D
-
-https://docs.google.com/document/d/1oFxEzABMw58F8aneSU10XvOrHmnnejtBzSsKqrW-aj8/edit?usp=sharing
