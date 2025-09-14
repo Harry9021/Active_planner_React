@@ -92,6 +92,21 @@ State is managed with **Zustand** in `src/store/weekendStore.ts` and persisted u
 
 ---
 
+### WorkFlow
+
+```mermaid
+flowchart TD
+    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
+    B --> C[📅 Select Weekend Dates]
+    C --> D[🎨 Curate Activities]
+    D --> E[🗂️ Organize Schedule]
+    E --> F[😊 Set Moods]
+    F --> G[💾 `Persist - Local Storage`]
+    G --> H[📤 Export / 🔗 Share]
+    H -->|Loop| D
+```
+---
+
 ### Components and key interactions
 
 - `Header`
@@ -182,15 +197,4 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
-### WorkFlow
 
-```mermaid
-flowchart TD
-    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
-    B --> C[📅 Select Weekend Dates]
-    C --> D[🎨 Curate Activities]
-    D --> E[🗂️ Organize Schedule]
-    E --> F[😊 Set Moods]
-    F --> G[💾 `Persist - Local Storage`]
-    G --> H[📤 Export / 🔗 Share]
-    H -->|Loop| D
