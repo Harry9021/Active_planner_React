@@ -8,7 +8,7 @@ import Start from "@/pages/Start";
 import Create from "./pages/Create";
 import NotFound from "./pages/NotFound";
 import SharedPlan from "./pages/SharedPlan";
-import { Analytics } from '@vercel/analytics/react';
+import { Analytics } from "@vercel/analytics/react";
 
 const queryClient = new QueryClient();
 
@@ -26,8 +26,8 @@ const App = () => (
           <Route path="/shared/:shareId" element={<SharedPlan />} />
           {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}
           <Route path="*" element={<NotFound />} />
-          <Analytics />
         </Routes>
+        <Analytics />
       </BrowserRouter>
     </TooltipProvider>
   </QueryClientProvider>
