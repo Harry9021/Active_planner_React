@@ -191,7 +191,7 @@ flowchart TD
     C --> D[🎨 Curate Activities]
     D --> E[🗂️ Organize Schedule]
     E --> F[😊 Set Moods]
-    F --> G[💾 Persist (Local Storage)]
+    F --> G[💾 `Persist - Local Storage`]
     G --> H[📤 Export / 🔗 Share]
     H -->|Loop| D
 
