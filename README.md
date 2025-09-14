@@ -92,6 +92,21 @@ State is managed with **Zustand** in `src/store/weekendStore.ts` and persisted u
 
 ---
 
+### WorkFlow
+
+```mermaid
+flowchart LR
+    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
+    B --> C[📅 Select Weekend Dates]
+    C --> D[🎨 Curate Activities]
+    D --> E[🗂️ Organize Schedule]
+    E --> F[😊 Set Moods]
+    F --> G[💾 `Persist - Local Storage`]
+    G --> H[📤 Export / 🔗 Share]
+    H -->|Loop| D
+```
+---
+
 ### Components and key interactions
 
 - `Header`
@@ -126,23 +141,30 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
-### Screenshots
+### Preview
 
 **Start / Login Page**
 ![Start Page](./SS/create_AC.png)
+---
 
 ![DatePicker](./SS/datepicker.png)
+---
 
 ![DashBoard Page Or Landing Page](./SS/dashboard_1.png)![DashBoard Page Or Landing Page](./SS/dashboard_2.png)
+---
 
 ![Activity Page](./SS/activity_tab.png)
 
+---
+
 ![Weekend Length Adjustment component](./SS/weekend_length.png)
+---
 
 ![Schedule Page](./SS/schedule_tab.png)
+---
 
 ![Share Pop-up](./SS/share_button.jpg)
-
+---
 ![Export Pop-up](./SS/export_button.png)
 
 ---
@@ -175,4 +197,4 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
-https://docs.google.com/document/d/1oFxEzABMw58F8aneSU10XvOrHmnnejtBzSsKqrW-aj8/edit?usp=sharing
+
