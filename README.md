@@ -126,23 +126,45 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
-### Screenshots
+### WorkFlow
+
+```mermaid
+flowchart TD
+    A[🏕️ Plan My Weekend] --> B[🔑 Create or Log in]
+    B --> C[📅 Select Weekend Dates]
+    C --> D[🎨 Curate Activities]
+    D --> E[🗂️ Organize Schedule]
+    E --> F[😊 Set Moods]
+    F --> G[💾 Persist (Local Storage)]
+    G --> H[📤 Export / 🔗 Share]
+    H -->|Loop| D
+
+```
+
+### Preview
 
 **Start / Login Page**
 ![Start Page](./SS/create_AC.png)
+---
 
 ![DatePicker](./SS/datepicker.png)
+---
 
 ![DashBoard Page Or Landing Page](./SS/dashboard_1.png)![DashBoard Page Or Landing Page](./SS/dashboard_2.png)
+---
 
 ![Activity Page](./SS/activity_tab.png)
 
+---
+
 ![Weekend Length Adjustment component](./SS/weekend_length.png)
+---
 
 ![Schedule Page](./SS/schedule_tab.png)
+---
 
 ![Share Pop-up](./SS/share_button.jpg)
-
+---
 ![Export Pop-up](./SS/export_button.png)
 
 ---
