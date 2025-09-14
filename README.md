@@ -126,6 +126,27 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 
 ---
 
+### Screenshots
+
+**Start / Login Page**
+![Start Page](./SS/create_AC.png)
+
+![DatePicker](./SS/datepicker.png)
+
+![DashBoard Page Or Landing Page](./SS/dashboard_1.png)(./SS/dashboard_2.png)
+
+![Activity Page](./SS/activity_tab.png)
+
+![Weekend Length Adjustment component](./SS/weekend_length.png)
+
+![Schedule Page](./SS/schedule_tab.png)
+
+![Share Pop-up](./SS/share_button.png)
+
+![Export Pop-up](./SS/export_button.png)
+
+---
+
 ### Data model (high level)
 
 - Activity: `{ id, name, icon, category, description }`
@@ -153,6 +174,5 @@ Key dependencies: React 18, Vite 5, TypeScript, Tailwind, shadcn/ui (Radix), Zus
 - Export requires browser permissions for downloads/clipboard; check your browser if blocked.
 
 ---
-
 
 https://docs.google.com/document/d/1oFxEzABMw58F8aneSU10XvOrHmnnejtBzSsKqrW-aj8/edit?usp=sharing
